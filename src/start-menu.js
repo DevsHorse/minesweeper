@@ -29,28 +29,32 @@ class StartMenu extends React.Component {
   }
 
   render() {
+
+    const currentTheme = this.props.theme.currentTheme;
+    let darkTheme = currentTheme === 'light' ? '' : 'game-difficult-dark';    
+
     return (
       <div className="container game-difficult-container">
         <div className="start-menu">
-          <div className="game-difficult" onClick={this.handleChoose} >
+          <div className={`game-difficult ${darkTheme}`} onClick={this.handleChoose} >
             <div>8x8 </div>
             <div className="game-difficult-mines">
-              10 <span  className="game-difficult-mines-span">мин</span>
+              10 <span  className="game-difficult-mines-span">mines</span>
             </div>
           </div>
-          <div className="game-difficult" onClick={this.handleChoose} >
+          <div className={`game-difficult ${darkTheme}`} onClick={this.handleChoose} >
           <div>16x16 </div>
             <div className="game-difficult-mines">
-              40 <span  className="game-difficult-mines-span">мин</span>
+              40 <span  className="game-difficult-mines-span">mines</span>
             </div>
           </div>
-          <div className="game-difficult" onClick={this.handleChoose} >
+          <div className={`game-difficult ${darkTheme}`} onClick={this.handleChoose} >
           <div>30x16 </div>
             <div className="game-difficult-mines">
-              99 <span  className="game-difficult-mines-span">мин</span>
+              99 <span  className="game-difficult-mines-span">mines</span>
             </div>
           </div>
-          <div className="game-difficult">
+          <div className={`game-difficult ${darkTheme}`}>
               soon...
           </div>
         </div>

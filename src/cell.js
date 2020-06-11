@@ -47,13 +47,16 @@ class Cell extends React.Component {
     const fz = this.props.styleOptions.width < 40 ? '30px' :
       this.props.styleOptions.width < 50 ? '40px' : 
       '70px';
+    
+    const theme = this.props.theme.currentTheme;
+    const closedCellColor = theme === 'light' ? '#BABDB6' : '#777776';
 
     //Cheat mode settings
-    const ifCheatOn = mined ? 'red' : opened ? this.bgColors[minesAround] : '#BABDB6';
+    const ifCheatOn = mined ? 'red' : opened ? this.bgColors[minesAround] : closedCellColor;
 
     //Default settings  
     const isLoss = this.props.cellOptions.loss ? 'red' : '#666';
-    const isOpened = opened ? this.bgColors[minesAround] : '#BABDB6';
+    const isOpened = opened ? minesAround > 0 ? this.bgColors[minesAround] : theme === 'light' ? this.bgColors[minesAround] : '#cecece' : closedCellColor;
     const ifCheatOff = mined && opened ? isLoss : isOpened;
 
     const cellStyle = {
@@ -68,18 +71,26 @@ class Cell extends React.Component {
       />);
 
     const textContent = minesAround > 0 ? minesAround : isMined;
-    const closedCell = this.props.cellOptions.opened ? '' : 'cell-closed';
+    const closedCell = this.props.cellOptions.opened ? '' : theme === 'light' ? 'cell-closed' : 'cell-closed cell-closed-dark';
+
+    const flagColor = theme === 'light' ? 'flag' : 'flag-dark';
 
     const isFlagged = !flagged ? null : 
-    (<FontAwesomeIcon 
+    (<FontAwesomeIcon
+      className={flagColor} 
       icon={faFlag} 
       style={{fontSize: `${this.props.styleOptions.width}`, textAlign: 'center', width: '100%'}} 
     />);
 
     const cellContent = opened ? textContent : isFlagged;
 
+    const currentTheme = this.props.theme.currentTheme;
+    let darkTheme = currentTheme === 'light' ? 'cell' : 'cell-dark'; 
+
+
+    console.log(this.bgColors[0]);
     return (
-      <div className='cell' style={cellStyle}
+      <div className={darkTheme} style={cellStyle}
         onClick={this.handleClick}
         onContextMenu={this.handleClick}
       >

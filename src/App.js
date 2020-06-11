@@ -2,6 +2,7 @@ import React from 'react';
 import StartMenu from './start-menu';
 import Game from './game';
 import './main.css';
+import './main-dark.css';
 
 
 class App extends React.Component {
@@ -16,6 +17,7 @@ class App extends React.Component {
       height: ''
     },
     isStartGame: false,
+    theme: 'light',
     isRestart: null
   }
 
@@ -30,21 +32,42 @@ class App extends React.Component {
     })
   }
 
+  handleTheme = (theme) => {
+    this.setState({theme: theme})
+  }
+
   render() {
+
+    const themeProps = {
+      currentTheme: this.state.theme,
+      handleTheme: this.handleTheme
+    };
 
     const gamePage =
       this.state.isStartGame ?
       (<Game
         handleGameStatus={this.handleGameStatus}
         gameDifficult={this.state.gameDifficult}
+        theme={themeProps}
       />) :
       (<StartMenu
         handleGameStatus={this.handleGameStatus}
         isRestart={this.state.isRestart}
+        theme={themeProps}
       />);
 
+
+      const body = document.querySelector('body');
+
+      if (this.state.theme === 'dark') {
+        body.style.background = '#1D1D1D';
+      } else {
+        body.style.background = '#F7F7F7';
+      }
+
+
     return (
-      <div className="App">
+      <div className='App'>
           {gamePage}   
       </div>
     );

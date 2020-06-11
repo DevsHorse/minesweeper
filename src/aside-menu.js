@@ -60,6 +60,13 @@ class AsideMenu extends React.Component {
     } 
   }
 
+  handleTheme = (event) => {
+    const theme = event.target.textContent.match(/^[\w]+/g)[0].trim();
+    if (this.props.theme) {
+      this.props.theme.handleTheme(theme);
+    }
+  }
+
   render () {
 
     let timer;
@@ -82,18 +89,29 @@ class AsideMenu extends React.Component {
     if (this.props.gameOver || this.props.gameWon) {
       clearInterval(timer);
     }
+
+    let nextTheme = '';
+    if (this.props.theme && this.props.theme.currentTheme === 'light') {
+      nextTheme = 'dark';
+    } else {
+      nextTheme = 'light';
+    }
+
+    const currentTheme = this.props.theme.currentTheme;
+    let headerBlockDark = currentTheme === 'light' ? '' : 'header-block-dark';
+    let menuBtnDark = currentTheme === 'light' ? '' : 'menu-btn-dark'; 
  
     return (
       <div className="aside-menu">
         <div className="menu-header">
-          <div className="header-block">
+          <div className={`header-block ${headerBlockDark}`}>
           <FontAwesomeIcon icon={faFlag} style={{fontSize: '30px'}}/>
             <div>
               {this.getFlagsCounter()}
             </div>
           </div>
 
-          <div className="header-block">
+          <div className={`header-block ${headerBlockDark}`}>
           <FontAwesomeIcon icon={faClock} style={{fontSize: '30px'}}/>
             <div>{this.state.time}</div>
           </div>
@@ -102,29 +120,35 @@ class AsideMenu extends React.Component {
         {/* Cheat Button */}
         <div>
           <button
-            className="menu-btn menu-btn-active"  
+            className={`menu-btn ${menuBtnDark}`}  
             onClick={this.handleCheat}>Cheat for test</button>
         </div>
         {/* End Cheat Button */}
 
+        <div>
+          <button
+            className={`menu-btn ${menuBtnDark}`}   
+            onClick={this.handleTheme}>{nextTheme} theme</button>
+        </div>
+
         <div className="menu-footer">
           <button
-           className="menu-btn"
+           className={`menu-btn ${menuBtnDark}`} 
            onClick={this.props.restartGame}
           >
-            Начать сначала
+            Restart
           </button>
           <button 
-            className="menu-btn" 
+            className={`menu-btn ${menuBtnDark}`} 
             onClick={this.handleDificult}
           >
-            Изменить сложность
+            Change difficult
           </button>
           <button 
-            className="menu-btn" 
+            className={`menu-btn ${menuBtnDark}`} 
             onClick={this.handlePause}
           >
-            Пауза
+            Pause
           </button>
         </div>
         

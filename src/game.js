@@ -380,6 +380,7 @@ class Game extends React.Component {
          gameWon={this.state.gameWon}
          score={this.state.score}
          pause={this.state.pause}
+         theme={this.props.theme}
         />
 
         <AsideMenu
@@ -393,6 +394,7 @@ class Game extends React.Component {
          score={this.state.score}
          restartGame={this.restartGame}
          handlePause={this.handlePause}
+         theme={this.props.theme}
         />
       </div>
     );

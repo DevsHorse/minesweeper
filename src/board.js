@@ -19,6 +19,7 @@ class Board extends React.Component {
           styleOptions={{width: this.props.gameState.cellSize, height: this.props.gameState.cellSize}}
           handleClick={this.props.handleClick}
           cheatOn={this.props.cheatOn}
+          theme={this.props.theme}
         />
       );
     }
@@ -32,8 +33,12 @@ class Board extends React.Component {
     const gameWon = this.props.gameWon ? <div className='game-over-or-won'>You won! <br />Time: {this.props.score}</div>: null;
     const gamePause = this.props.pause ? <div className='game-pause'>Pause</div>: null;
 
+    const currentTheme = this.props.theme.currentTheme;
+    let darkTheme = currentTheme === 'light' ? '' : 'board-dark';   
+
+
     return (
-      <div className='board' style={{minWidth: this.props.gameState.boardWidth}}>
+      <div className={`board ${darkTheme}`} style={{minWidth: this.props.gameState.boardWidth}}>
 
         {this.getCell()}
         {gameOver}
