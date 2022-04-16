@@ -2,10 +2,19 @@ body {
   background-color: #F7F7F7;
   font-family: 'Roboto', sans-serif;
 }
+.App {
+  height: 100vh;
+}
+.App.light {
+  background-color: #F7F7F7;
+}
+.App.dark {
+  background-color: #1D1D1D;
+}
 .container {
   display: flex;
   justify-content: space-between;
-  flex-wrap: no-wrap;
+  flex-wrap: nowrap;
   width: 1140px;
   margin: 0 auto;
 }
