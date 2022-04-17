@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVirus, faFlag } from '@fortawesome/free-solid-svg-icons';
-import config from '../config';
+import config from '../../config';
 import {useSelector} from 'react-redux';
 
 
@@ -16,7 +16,7 @@ const Cell = ({cellOptions, handleClick}) => {
 
     if (cellOptions.opened) {
       return;
-    } 
+    }
 
     if (game.gameOver) {
       return;

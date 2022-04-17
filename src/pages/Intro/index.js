@@ -10,8 +10,8 @@ const Intro = () => {
   return (
     <div className="container game-difficult-container">
       <div className="start-menu">
-        {config.gameFields.map(field => (
-          <DifficultTile field={field} onClick={() => dispatch(startGame(field))} />
+        {config.gameFields.map((field, idx) => (
+          <DifficultTile key={idx} field={field} onClick={() => dispatch(startGame(field))} />
         ))}
       </div>
     </div>
